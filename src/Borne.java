@@ -11,6 +11,8 @@ public class Borne {
     private static final int mois = 1 + dateActuelle.get(Calendar.MONTH);
     private static final int annee = dateActuelle.get(Calendar.YEAR);
     private static final int jour = dateActuelle.get(Calendar.DAY_OF_WEEK);
+    private final static int heure = dateActuelle.get(Calendar.HOUR_OF_DAY);
+    private final static int minutes = dateActuelle.get(Calendar.MINUTE);
 
     private String idStationnement;
     private String modePaiement;
