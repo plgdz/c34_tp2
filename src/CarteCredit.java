@@ -6,7 +6,7 @@ public class CarteCredit {
     private int moisExp;
     private int anneeExp;
     private double solde;
-    private static final String regNum = "\\d{4}\\s\\d{4}\\s\\d{4}\\s\\d{4}";
+    private static final String regNumCarte = "\\d{4}\\s\\d{4}\\s\\d{4}\\s\\d{4}";
 
     public CarteCredit(String numeroCarte, int moisExp, int anneeExp){
         this.numeroCarte = numeroCarte;
@@ -24,13 +24,15 @@ public class CarteCredit {
     }
 
     public boolean verifCarteCredit(){
+        boolean valid = false;
+
         GregorianCalendar dateActuelle = new GregorianCalendar();
         int mois = 1 + dateActuelle.get(Calendar.MONTH);
         int annee = dateActuelle.get(Calendar.YEAR);
-        annee = Integer.parseInt(String.valueOf(annee).substring(2));
-        boolean valid = false;
 
-        if (this.numeroCarte.matches(regNum)){
+        annee = Integer.parseInt(String.valueOf(annee).substring(2));
+
+        if (this.numeroCarte.matches(regNumCarte)){
             if (this.anneeExp < annee){
                 valid = true;
             }
@@ -44,7 +46,7 @@ public class CarteCredit {
     }
 
     public static void main(String[] args) {
-        CarteCredit test = new CarteCredit("1111 1111 1111 1111", 10, 22);
+        CarteCredit test = new CarteCredit("1111 1111 1111 1111", 5, 22);
         boolean t = test.verifCarteCredit();
         System.out.println(t);
     }
