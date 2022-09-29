@@ -46,6 +46,7 @@ public class Borne {
         if (credit.verifCarteCredit()){
             if (credit.getSolde() >= 6){
                 this.modePaiement = "Credit";
+                valid = true;
             }
         }
         return valid;
