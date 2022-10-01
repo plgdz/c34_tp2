@@ -241,8 +241,10 @@ public class GUITP2 {
 
     private void bouton25_actionPerformed() {
         //à coder
+        zoneRecu.setText("");
         if (borne.getIdValid() && borne.getPaiementCash()) {
-            champMessage.setText(borne.actionBouton(1));
+            borne.actionBouton(1);
+            champMessage.setText(borne.printTempMontant());
         } else if (!borne.getIdValid()){
             champMessage.setText("Vous devez saisir un code de stationnement valide.");
 
@@ -253,8 +255,10 @@ public class GUITP2 {
 
     private void bouton100_actionPerformed() {
         //à coder
+        zoneRecu.setText("");
         if (borne.getIdValid() && borne.getPaiementCash()) {
-            champMessage.setText(borne.actionBouton(2));
+            borne.actionBouton(2);
+            champMessage.setText(borne.printTempMontant());
         } else if (!borne.getIdValid()){
             champMessage.setText("Vous devez saisir un code de stationnement valide.");
 
@@ -265,8 +269,10 @@ public class GUITP2 {
 
     private void bouton200_actionPerformed() {
         //à coder
+        zoneRecu.setText("");
         if (borne.getIdValid() && borne.getPaiementCash()){
-            champMessage.setText(borne.actionBouton(3));
+            borne.actionBouton(3);
+            champMessage.setText(borne.printTempMontant());
         } else if (!borne.getIdValid()){
             champMessage.setText("Vous devez saisir un code de stationnement valide.");
 
@@ -277,6 +283,7 @@ public class GUITP2 {
 
     private void boutonValiderDateExp_actionPerformed(){
             // à coder
+        zoneRecu.setText("");
         if (borne.getIdValid() && borne.getPaiementCredit()) {
             boolean carteValide = borne.paiementCredit(champNumeroCarte.getText(), champDateExp.getText());
             if (carteValide == true) {
@@ -294,8 +301,10 @@ public class GUITP2 {
 
     private void bouton25Credit_actionPerformed() {
         //à coder
+        zoneRecu.setText("");
         if (borne.getIdValid() && borne.getPaiementCredit()) {
-            champMessage.setText(borne.actionBouton(4));
+            borne.actionBouton(4);
+            champMessage.setText(borne.printTempMontant());
         } else if (!borne.getPaiementCredit()){
             champMessage.setText("Vous devez saisir une carte de credit valide.");
         } else {
@@ -305,8 +314,10 @@ public class GUITP2 {
 
     private void boutonMaxCredit_actionPerformed() {
         //à coder
+        zoneRecu.setText("");
         if (borne.getIdValid() && borne.getPaiementCredit()) {
-            champMessage.setText(borne.actionBouton(5));
+            borne.actionBouton(5);
+            champMessage.setText(borne.printTempMontant());
         } else if (!borne.getIdValid()){
             champMessage.setText("Vous devez saisir un code de stationnement valide.");
 
@@ -318,6 +329,7 @@ public class GUITP2 {
     public void boutonNumeroLettre_actionPerformed(String lettreChiffre) {
         // à compléter, afficher la place choisie dans le champMessage à partir de la lettre ou du chiffre cliqué en paramètre
        place += lettreChiffre;
+       zoneRecu.setText("");
        champMessage.setText("Code de stationnement : " + place);
     }
 
@@ -325,24 +337,29 @@ public class GUITP2 {
         //à coder
         boolean valid = borne.verifIdStationement(place);
         if (valid == true){
-            champMessage.setText("Code valide, choisissez un mode de paiement...");
+            champMessage.setText("Code VALIDE, choisissez un mode de paiement...");
+            place = "";
         } else {
             place = "";
-            champMessage.setText("Code invalide, veuillez saisir a nouveau votre code.");
+            champMessage.setText("Code NON VALIDE, veuillez saisir a nouveau votre code.");
         }
     }
 
     private void boutonOK_actionPerformed() {
         
         // à coder
-       zoneRecu.setText(borne.setTransaction());
+        champMessage.setText("Transaction reussie.");
+        zoneRecu.setText(borne.setTransaction());
+        champNumeroCarte.setText("");
+        champDateExp.setText("");
+        borne.resetBorne();
 
     }
 
     private void boutonRapport_actionPerformed()
     {
-        //à coder
-        
+        champMessage.setText("");
+        zoneRecu.setText(borne.printRapport());
     }
 
 

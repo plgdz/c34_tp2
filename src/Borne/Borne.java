@@ -31,6 +31,9 @@ public class Borne {
     public Borne(){
         this.paiementCredit = this.paiementCash = true;
         this.idValid = false;
+        this.montantTransaction = 0;
+        this.dureeSationnement = 0;
+        this.modePaiement = "";
     }
     public boolean getIdValid(){
         return this.idValid;
@@ -91,6 +94,7 @@ public class Borne {
         if (idStationnement.matches(regIdStationnement)){
             this.idStationnement = idStationnement;
             this.idValid = valid = true;
+            this.transaction = new Transaction(this.idStationnement);
         }
         return valid;
     }
@@ -131,9 +135,7 @@ public class Borne {
         this.montantTransaction = 6;
         this.dureeSationnement = 120;
     }
-    public String actionBouton(int bouton){
-        String output = "Duree : " + this.dureeSationnement + " minutes        Prix : " + this.montantTransaction + "$";
-
+    public void actionBouton(int bouton){
         if (bouton >= 1 && bouton <= 3){
             if (bouton == 1){
                 this.add25();
@@ -155,11 +157,25 @@ public class Borne {
             this.paiementCredit = true;
             this.modePaiement = "Credit";
         }
-        return output;
+    }
+    public String printTempMontant(){
+        return "Duree : " + this.dureeSationnement + " minutes        Prix : " + this.montantTransaction + "$";
     }
     public String setTransaction(){
-        this.transaction = new Transaction(this.idStationnement, this.dureeSationnement, this.montantTransaction, this.modePaiement);
+        transaction.setDureeStationnement(this.dureeSationnement);
+        transaction.setMontant(this.montantTransaction);
+        transaction.setTypePaiement(this.modePaiement);
         this.sommeTotale += this.montantTransaction;
         return transaction.printTransaction();
+    }
+    public void resetBorne(){
+        this.paiementCredit = this.paiementCash = true;
+        this.idValid = false;
+        this.montantTransaction = 0;
+        this.dureeSationnement = 0;
+        this.modePaiement = "";
+    }
+    public String printRapport(){
+        return "Montant total de la borne : " + this.sommeTotale + "$";
     }
 }

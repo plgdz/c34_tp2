@@ -18,11 +18,20 @@ public class Transaction {
     private String typePaiement;
     private CarteCredit carte;
 
-    public Transaction(String code, int duree, double prix, String modePaiement){
+    public Transaction(String code){
         this.numTransaction = code;
-        this.dureeStationnement = duree;
-        this.montant = prix;
-        this.typePaiement = modePaiement;
+    }
+
+    public void setDureeStationnement(int dureeStationnement) {
+        this.dureeStationnement = dureeStationnement;
+    }
+
+    public void setMontant(double montant) {
+        this.montant = montant;
+    }
+
+    public void setTypePaiement(String typePaiement) {
+        this.typePaiement = typePaiement;
     }
 
     public String printTransaction(){
@@ -32,8 +41,11 @@ public class Transaction {
         dateActuelle.add((GregorianCalendar.MINUTE), this.dureeStationnement);
         String dateFormatFin = format.format(dateActuelle.getTime());
         String recu = "RECU DE STATIONNEMENT\n\n" +
-                "Debut de la peridode de stationnement : " + dateFormateDebut + "\n" +
-                "Fin de la priode de stationement : " + dateFormatFin;
+                "Espace de stationnement : " + this.numTransaction +"\n" +
+                "Debut stationnement : " + dateFormateDebut + "\n" +
+                "Fin stationement : " + dateFormatFin + "\n\n" +
+                "Mode de paiement : " + this.typePaiement + "\n" +
+                "Prix : " + this.montant + "$";
         return recu;
     }
 }
