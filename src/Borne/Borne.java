@@ -93,27 +93,49 @@ public class Borne {
         return valid;
     }
     public void add25(){
-        this.montantTransaction += piece.getQuart();
-        this.dureeSationnement += 5;
+        if(this.dureeSationnement + 5 <= 120) {
+            this.montantTransaction += piece.getQuart();
+            this.dureeSationnement += 5;
+            this.paiementCash = true;
+            this.paiementCredit = false;
+        } else {
+            this.dureeSationnement = 120;
+            this.montantTransaction += piece.getQuart();
+        }
     }
     public void add100(){
-        this.montantTransaction += piece.getUn();
-        this.dureeSationnement +=20;
-        this.paiementCash = true;
-        this.paiementCredit = false;
-
+        if(this.dureeSationnement + 20 <= 120) {
+            this.montantTransaction += piece.getUn();
+            this.dureeSationnement += 20;
+            this.paiementCash = true;
+            this.paiementCredit = false;
+        } else {
+            this.dureeSationnement = 120;
+            this.montantTransaction += piece.getUn();
+        }
     }
     public void add200(){
-        this.montantTransaction += piece.getDeux();
-        this.dureeSationnement += 40;
+        if(this.dureeSationnement + 40 <= 120){
+            this.montantTransaction += piece.getDeux();
+            this.dureeSationnement += 40;
+            this.paiementCash = true;
+            this.paiementCredit = false;
+        } else {
+            this.dureeSationnement = 120;
+            this.montantTransaction += piece.getDeux();
+        }
     }
     public void add25Credit(){
-        this.montantTransaction += 0.25;
-        this.dureeSationnement += 5;
+        if (this.dureeSationnement + 5 <= 120) {
+            this.montantTransaction += 0.25;
+            this.dureeSationnement += 5;
+        }
     }
     public void addMax(){
-        this.montantTransaction = 6;
-        this.dureeSationnement = 120;
+        if(this.dureeSationnement < 120) {
+            this.montantTransaction = 6;
+            this.dureeSationnement = 120;
+        }
     }
     public void actionBouton(int bouton){
         if (bouton >= 1 && bouton <= 3){
