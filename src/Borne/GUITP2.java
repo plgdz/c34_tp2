@@ -151,7 +151,12 @@ public class GUITP2 {
         
 
         // vérifier si la Borne.Borne est en fonction selon les heures
-        champMessage.setText(borne.borneActive());
+        if (borne.borneActive() == true){
+            champMessage.setText("Entrez votre identifiant de stationement.");
+        } else {
+            champMessage.setText("Stationement gratuit");
+        }
+
         
 
 

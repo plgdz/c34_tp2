@@ -34,6 +34,7 @@ public class Borne {
         this.montantTransaction = 0;
         this.dureeSationnement = 0;
         this.modePaiement = "";
+        this.active = this.borneActive();
     }
     public boolean getIdValid(){
         return this.idValid;
@@ -44,47 +45,26 @@ public class Borne {
     public boolean getPaiementCredit(){
         return this.paiementCredit;
     }
-    public String borneActive(){
-        String message;
+    public boolean borneActive(){
         boolean active = false;
         //Lundi a vendredi entre 9 et 21h : borne active
         if (this.jour >= 2 && this.jour <= 6 && this.heure >= 9 && this.heure < 21){
             active = true;
-            this.active = true;
-        }
-        //Lundi a vendredi en dehors des heures payantes :
-        else if (this.jour >= 2 && this.jour <= 6 && this.heure < 9 && this.heure >= 21){
-            active = false;
-            this.active = false;
         }
         //Samedi dans les heures payantes
         else if (this.jour == 7  && this.heure >= 9 && this.heure < 18){
             active = true;
-            this.active = true;
-        }
-        // Samedi dans les heurs gratuites
-        else if (this.jour == 7 && this.heure < 9 && this.heure >=18){
-            active = false;
-            this.active = false;
         }
         //Dimanche dans les heures payantes
         else if (this.jour == 1 && this.heure >= 13 && this.heure < 18){
             active = true;
-            this.active = true;
         }
         //dimanche dans les heures gratuite
         else {
             active = false;
-            this.active = false;
-        }
+       }
 
-        //choix du message pour utilisateur
-        if (active == true){
-            message = "Veuillez saisir votre identifiant de stationnement";
-        } else {
-            message = "Stationnement gratuit";
-        }
-        return message;
+        return active;
     }
     public void setSommeTotale(double somme) {
         this.sommeTotale += somme;
