@@ -164,6 +164,7 @@ public class Borne {
         return "Duree : " + this.dureeSationnement + " minutes        Prix : " + this.montantTransaction + "$";
     }
     public String setTransaction(){
+        transaction = new Transaction(this.idStationnement);
         transaction.setDureeStationnement(this.dureeSationnement);
         transaction.setMontant(this.montantTransaction);
         transaction.setTypePaiement(this.modePaiement);

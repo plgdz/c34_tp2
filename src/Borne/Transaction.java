@@ -5,12 +5,12 @@ import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
 
 public class Transaction {
-    private static final GregorianCalendar dateActuelle = new GregorianCalendar();
-    private static final int mois = 1 + dateActuelle.get(Calendar.MONTH);
-    private static final int annee = dateActuelle.get(Calendar.YEAR);
-    private static final int jour = dateActuelle.get(Calendar.DAY_OF_MONTH);
-    private final static int heure = dateActuelle.get(Calendar.HOUR_OF_DAY);
-    private final static int minutes = dateActuelle.get(Calendar.MINUTE);
+    private GregorianCalendar dateActuelle;
+    private int mois;
+    private int annee;
+    private int jour;
+    private int heure;
+    private int minutes;
 
     private String numTransaction;
     private int dureeStationnement;
@@ -20,6 +20,12 @@ public class Transaction {
 
     public Transaction(String code){
         this.numTransaction = code;
+        dateActuelle = new GregorianCalendar();
+        mois = 1 + dateActuelle.get(Calendar.MONTH);
+        annee = dateActuelle.get(Calendar.YEAR);
+        jour = dateActuelle.get(Calendar.DAY_OF_MONTH);
+        heure = dateActuelle.get(Calendar.HOUR_OF_DAY);
+        minutes = dateActuelle.get(Calendar.MINUTE);
     }
 
     public void setDureeStationnement(int dureeStationnement) {
